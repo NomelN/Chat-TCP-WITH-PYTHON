@@ -32,7 +32,7 @@ def handle(client):
             clients.remove(client)
             client.close()
             nickname = nicknames[index]
-            diffuse(f"{nickname} left".encode("utf-8"))
+            diffuse(f"{nickname} left the chat".encode("utf-8"))
             nicknames.remove(nickname)
             break
 
@@ -50,12 +50,13 @@ def receive():
         clients.append(client)
 
         #Affichage et diffusion du surnom
-        print(f"Nickname is {nickname}")
-        diffuse(f"{nickname} joined!".encode("utf-8"))
+        print(f"Nickname of the client is {nickname}")
+        diffuse(f"{nickname} joined the chat!".encode("utf-8"))
         client.send(b"Connected to server!")
 
         #Démarrage du fil
         thread = threading.Thread(target=handle, args=(client,))
         thread.start()
 
+print("Server in listening")
 receive()
